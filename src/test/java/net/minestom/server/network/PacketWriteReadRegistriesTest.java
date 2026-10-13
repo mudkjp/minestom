@@ -306,7 +306,9 @@ import net.minestom.server.recipe.RecipeProperty;
 import net.minestom.server.recipe.display.RecipeDisplay;
 import net.minestom.server.recipe.display.SlotDisplay;
 import net.minestom.server.registry.Registries;
-import net.minestom.server.scoreboard.Sidebar;
+import net.minestom.server.scoreboard.DisplaySlot;
+import net.minestom.server.scoreboard.NumberFormat;
+import net.minestom.server.scoreboard.RenderType;
 import net.minestom.server.sound.SoundEvent;
 import net.minestom.server.statistic.StatisticCategory;
 import net.minestom.server.utils.Either;
@@ -515,7 +517,7 @@ public class PacketWriteReadRegistriesTest {
 
         addServerPackets(new DestroyEntitiesPacket(List.of(5, 5, 5)));
         addServerPackets(new DisconnectPacket(COMPONENT));
-        addServerPackets(new DisplayScoreboardPacket((byte) 5, "scoreboard"));
+        addServerPackets(new DisplayScoreboardPacket(DisplaySlot.SIDEBAR, "scoreboard"));
         addServerPackets(new WorldEventPacket(5, BLOCK_VEC, 5, false));
         addServerPackets(new EndCombatEventPacket(5));
         addServerPackets(new EnterCombatEventPacket());
@@ -627,11 +629,11 @@ public class PacketWriteReadRegistriesTest {
                 (byte) RespawnPacket.COPY_METADATA)
         );
         addServerPackets(
-                new ScoreboardObjectivePacket("objective", (byte) 0, COMPONENT, ScoreboardObjectivePacket.Type.HEARTS, Sidebar.NumberFormat.blank()),
-                new ScoreboardObjectivePacket("objective", (byte) 0, COMPONENT, ScoreboardObjectivePacket.Type.HEARTS, null),
+                new ScoreboardObjectivePacket("objective", (byte) 0, COMPONENT, RenderType.HEARTS, NumberFormat.blank()),
+                new ScoreboardObjectivePacket("objective", (byte) 0, COMPONENT, RenderType.HEARTS, null),
                 new ScoreboardObjectivePacket("objective", (byte) 1, null, null, null),
-                new ScoreboardObjectivePacket("objective", (byte) 2, COMPONENT, ScoreboardObjectivePacket.Type.HEARTS, Sidebar.NumberFormat.styled(Component.empty())),
-                new ScoreboardObjectivePacket("objective", (byte) 2, COMPONENT, ScoreboardObjectivePacket.Type.HEARTS, null)
+                new ScoreboardObjectivePacket("objective", (byte) 2, COMPONENT, RenderType.HEARTS, NumberFormat.styled(Component.empty())),
+                new ScoreboardObjectivePacket("objective", (byte) 2, COMPONENT, RenderType.HEARTS, null)
         );
         addServerPackets(new SelectAdvancementTabPacket("minecraft:story/root"));
         addServerPackets(new ServerDataPacket(COMPONENT, null));
